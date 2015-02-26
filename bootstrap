@@ -5,5 +5,10 @@ config_files=$( cd "$(dirname "$0")" && pwd )
 
 for file in `ls $config_files/files/`
 do
+  if [ -f $HOME/.$file ]
+  then
+    cp $HOME/.$file $HOME/.$file.bk
+  fi
+
   ln -sfn $config_files/files/$file $HOME/.$file
 done
