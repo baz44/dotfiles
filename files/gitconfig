@@ -1,8 +1,8 @@
 [user]
-        name = Basel Farah
+  name = Basel Farah
 	email= baself@gmail.com
 [color]
-        ui = true
+  ui = true
 [core]
-        editor = vim
-        excludesfile = ~/.gitignore
+  editor = vim
+  excludesfile = ~/.gitignore
