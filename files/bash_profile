@@ -10,4 +10,8 @@ then
   source $HOME/.secrets
 fi
 
+if [ -f $HOME/.a_git-completion.bash ]; then
+  . $HOME/.a_git-completion.bash
+fi
+
 source $HOME/.rvm/scripts/rvm
