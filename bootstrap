@@ -17,29 +17,21 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 set -e
+dotfiles_path=$( cd "$(dirname "$0")"/files && pwd )
 
-function copy_file() {
-    rsync -a --no-perms $1 $HOME
-    echo "copied $1 to $HOME/$file"
+function link_file() {
+    ln -sf $dotfiles_path/$1 $HOME/$1
+    echo "linked $1 to $HOME/$1"
 }
 
 function backup_file() {
     mkdir -p $HOME/dotfiles_backup
 
-    if [ -d $1 ]
-    then
-        cp -r $HOME/$1 $HOME/dotfiles_backup/$1.bk
-    else
-        cp $HOME/$1 $HOME/dotfiles_backup/$1.bk
-    fi
+    rsync -a --no-perms $HOME/$1 $HOME/dotfiles_backup/$1.bk
     echo "Back up $HOME/$1.bk created"
 }
 
-echo "fetching and updating git submodules"
-git submodule init
-git submodule update --remote --merge
-
-cd "$(dirname "$0")/files"
+cd $dotfiles_path
 
 for file in `ls -A`
 do
@@ -50,9 +42,9 @@ do
       if [[ $REPLY =~ ^[Yy]$ ]]
       then
           backup_file $file
-          copy_file $file
+          link_file $file
       fi
   else
-      copy_file $file
+      link_file $file
   fi
 done
