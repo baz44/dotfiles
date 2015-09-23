@@ -2,16 +2,16 @@
 set -e
 
 function copy_file() {
-    rsync -a --no-perms $1 $HOME/dotfiles_backup/
-    echo "copied $1 to $HOME/dotfiles_backup/$file"
+    rsync -a --no-perms $1 $HOME
+    echo "copied $1 to $HOME/$file"
 }
 
 function backup_file() {
     if [ -d $1 ]
     then
-        cp -r $HOME/$1 $HOME/$1.bk
+        cp -r $HOME/$1 $HOME/dotfiles_backup/$1.bk
     else
-        cp $HOME/$1 $HOME/$1.bk
+        cp $HOME/$1 $HOME/dotfiles_backup/$1.bk
     fi
     echo "Back up $HOME/$1.bk created"
 }
