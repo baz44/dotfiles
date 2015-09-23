@@ -20,8 +20,15 @@ set -e
 dotfiles_path=$( cd "$(dirname "$0")"/files && pwd )
 
 function link_file() {
+    if [ -h $HOME/$1 ]
+    then
+        echo "unlink $HOME/$1"
+        rm $HOME/$1
+    fi
+
+
     ln -sf $dotfiles_path/$1 $HOME/$1
-    echo "linked $1 to $HOME/$1"
+    echo "$HOME/$1 to linked $dotfiles_path/$1"
 }
 
 function backup_file() {
@@ -31,20 +38,52 @@ function backup_file() {
     echo "Back up $HOME/$1.bk created"
 }
 
-cd $dotfiles_path
+function install_files() {
+    cd $dotfiles_path
 
-for file in `ls -A`
-do
-  if [ -f $HOME/$file ] || [ -d $HOME/$file ]
-  then
-      read -p "$HOME/$file exist, overwrite it and created backup (y/n)? "
+    for file in `ls -A`
+    do
+        if [ -f $HOME/$file ] || [ -d $HOME/$file ]
+        then
+            read -p "$HOME/$file exist, overwrite it (y/n)? "
 
-      if [[ $REPLY =~ ^[Yy]$ ]]
-      then
-          backup_file $file
-          link_file $file
-      fi
-  else
-      link_file $file
-  fi
-done
+            if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                link_file $file
+            fi
+        else
+            link_file $file
+        fi
+    done
+}
+
+function clone_repo() {
+    git clone git@github.com:baz44/.emacs.d.git $HOME/.emacs.d
+    cd $HOME/.emacs.d
+}
+
+function install_emacs() {
+    read -p "Do you want to install .emacs.d settings (y/n)? "
+
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        if [ -d $HOME/.emacs.d ]
+        then
+            read -p "$HOME/.emacs.d exist, overwrite it and create backup (y/n)? "
+
+            if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                backup_file .emacs.d
+                rm -fr $HOME/.emacs.d
+                clone_repo
+            fi
+        else
+            clone_repo
+        fi
+    fi
+}
+
+echo "=================== Installing dotfiles ==================="
+install_files
+echo "=================== Installing emacs settings ==================="
+install_emacs
