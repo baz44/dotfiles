@@ -27,3 +27,6 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export GOPATH="$HOME/projects/golang"
 export PATH="$GOPATH/bin:$PATH"
 
+
+# add path to lein
+export PATH="~/bin/:$PATH"
