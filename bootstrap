@@ -7,8 +7,8 @@ function copy_file() {
 }
 
 function backup_file() {
-    mkdir $HOME/dotfiles_backup
-    
+    mkdir -p $HOME/dotfiles_backup
+
     if [ -d $1 ]
     then
         cp -r $HOME/$1 $HOME/dotfiles_backup/$1.bk
@@ -18,9 +18,9 @@ function backup_file() {
     echo "Back up $HOME/$1.bk created"
 }
 
-echo "git submodules"
+echo "fetching and updating git submodules"
 git submodule init
-git submodule update
+git submodule update --remote --merge
 
 cd "$(dirname "$0")/files"
 
