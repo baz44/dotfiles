@@ -85,5 +85,6 @@ function install_emacs() {
 
 echo "=================== Installing dotfiles ==================="
 install_files
+echo
 echo "=================== Installing emacs settings ==================="
 install_emacs
