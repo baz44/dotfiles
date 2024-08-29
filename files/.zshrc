@@ -59,7 +59,7 @@ plugins=(git)
 
 # User configuration
 
-export PATH="~/bin/:/home/bfarah/projects/golang/bin:/usr/local/heroku/bin:~/bin/:/home/bfarah/projects/golang/bin:/usr/local/heroku/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/smlnj/bin:/home/bfarah/.rvm/bin:/usr/local/smlnj/bin:/home/bfarah/.rvm/bin"
+export PATH="~/bin/:$HOME/projects/golang/bin:/usr/local/heroku/bin:~/bin/:$HOME/projects/golang/bin:/usr/local/heroku/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/smlnj/bin:$HOME/.rvm/bin:/usr/local/smlnj/bin:$HOME/.rvm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 
