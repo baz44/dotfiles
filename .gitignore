@@ -1,1 +1,4 @@
 files/.lein/self-installs
+files/.lein/repl-port
+.DS_Store
+*~

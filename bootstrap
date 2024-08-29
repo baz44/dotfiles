@@ -83,6 +83,19 @@ function install_emacs() {
     fi
 }
 
+function install_oh_my_zsh() {
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+}
+
+function install_required_fonts() {
+    git clone https://github.com/romkatv/powerlevel10k.git
+    sudo mv powerlevel10k.git $ZSH_CUSTOM/themes/
+}
+
+echo "=================== Installing oh-my-zsh ==================="
+install_oh_my_zsh
+echo "=================== Installing required fonts ==================="
+install_required_fonts
 echo "=================== Installing dotfiles ==================="
 install_files
 echo
